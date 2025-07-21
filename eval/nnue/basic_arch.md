@@ -20,9 +20,9 @@ The format of the input layer allows the accumulators to be efficiently updated,
 
 Most NNUE networks have exactly one output neuron, indicating the heuristic score of a position. The accumulator values are passed through an activation function, then forwarded to the output layer by taking the dot product to the output weights, and adding the output bias.
 
-During training, the final evaluation value is passed though sigmoid activation to be trained on a target value. The target value is the result linear interpolation of the game result (0, 0.5, 1), and `sigmoid(evaluation/eval_scale)`.
+During training, the final evaluation is passed though sigmoid activation to be trained on a target value. The target value is the result linear interpolation of the game result (0, 0.5, 1), and `sigmoid(evaluation/eval_scale)`.
 
-However, during inference, the sigmoid function is unused, and the final evaluation is scaled by `eval_scale`. This will produce a reasonable evaluation value with a large range and suffient precision.
+However, during inference, the sigmoid function is unused, and the final evaluation is scaled by `eval_scale`. This will produce a reasonable evaluation with a large range and suffient precision.
 
 ### Quantization
 
