@@ -24,6 +24,34 @@ During training, the final evaluation is passed through sigmoid activation to be
 
 However, during inference, the sigmoid function is unused, and the final evaluation is scaled by `eval_scale`. This will produce a reasonable evaluation with a large range and sufficient precision.  
 
+```c
+// When forwarding the accumulator values, the network does not consider the color of the perspectives.
+// Rather, we are more interested in whether the accumulator is from the perspective of the side-to-move.
+int32_t forward(const struct Network*     const network,
+                const struct Accumulator* const stm_accumulator,
+                const struct Accumulator* const nstm_accumulator)
+{
+    int32_t eval = 0;
+
+    // Dot product to the weights
+    for (int i = 0; i < HL_SIZE; i++)
+    {
+        // BEWARE of integer overflows here.
+        eval += activation( stm_accumulator->values[i]) * network->output_weights[i];
+        eval += activation(nstm_accumulator->values[i]) * network->output_weights[i + HL_SIZE];
+    }
+
+    // Uncomment the following dequantization step when using SCReLU
+    // eval /= QA;
+    eval += network->output_bias;
+
+    eval *= SCALE;
+    eval /= QA * QB;
+
+    return eval;
+}
+```
+
 ### Quantization
 
 You may be wondering where the constants QA and QB came from, or why the final evaluation is divided by their product. This is because most NNUE networks are quantized. During training, the weights of the network are represented in floating points, since they offer a continuous range of values and reasonable accuracy. However, floating points are slow, and since floating point operations are not completely accurate, small errors could build up on each accumulator update, resulting in inaccurate evaluation. Therefore, trained floating-point weights are quantized before loading the network.
