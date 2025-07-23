@@ -42,3 +42,13 @@ It is not clear why self-play elo translates so well to play against other oppon
 SPRT is a statistical test that will automatically stop when reaching statistical significance. It is provably optimal in that it takes the least number of samples on average to prove a hypothesis with statistical significance.
 
 # Why opening books
+When running self-play tests, it is crucial to use opening books. Essentially, opening books are used to add variety to the games that the engines play. 
+Consider the case where testing is only done from the starting position of chess, and that the engines are playing the same few games over and over. Then, even if we play thousands of games, we really only have a few statistical samples that we are using to draw conclusions. It could also be viewed from the perspective that every sample is highly correlated to the rest and the samples are not independent. 
+This logic does not apply if we use a high quality opening book with lots of positions.
+
+This can also be viewed from the perspective of optimizing for certain types of positions. If the engine is always playing from a few opening position, it will only optimize for those openings, and it's not guaranteed that it is actually improving at chess in general.
+
+# Game Pairs
+It is important to use game pairs when doing any kind of match between engines. That is, each engine should play the opening from both white and black. There are a few reasons for this
+1. Most openings are not perfectly balanced. If an engine gets lucky and plas the advantaged side of an opening slightly more often, it may win more often than it should. Game pairs prevent this, as the engine now also has to play the disadvantaged side
+2. Game pairs actually reduce the variance when measuring elo, so SPRT tests can be run faster and error bars on elo are smaller
