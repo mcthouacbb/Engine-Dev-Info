@@ -1,4 +1,4 @@
-The majority of testing is done to verify that a functional change(patch) gains elo in a chess engine. Sometimes, a test is done to verify a change doesn't lose elo. The method used to test changes used is very important, and the correct way to test changes has been standardized by engine developers over decades.
+The majority of testing is done to verify that a functional change(patch) gains elo in a chess engine. Sometimes, a test is done to verify a change doesn't lose elo. The method used to test changes is very important, and the correct way to test changes has been standardized by engine developers over decades.
 Common beginner traps include
 - Targeting poor measures of playing strength, such as TTD/NTD
 - Testing with any kind of test suite
@@ -11,7 +11,11 @@ The standard way to test changes is to run self-play SPRTs. This involves taking
 Games are typically run at STC(8+0.08 or 10+0.1). The games are played out from specific openings obtained from an opening book. The engines have no say in the opening selection for testing, the match runner selects a random opening and the engines are to play out from there.
 
 # Why Elo
-A natural consideration is why elo is used as a metric rather than something like TTD.
+A natural consideration is why elo is used as a metric rather than something like TTD or a test suite.
+
+The simple answer is that measuring Elo is guaranteed to make your engine play better(that is, playing good moves), and playing better will naturally lead to other desirable factors, such as outputting accurate scores, finding tactics, and reaching high depths.
+
+However, the inverse does not apply. Optimizing for finding tactics, reaching high depths, outputting accurate scores, or any metric other than elo does not guarantee making your engine better, and it can make your engine worse.
 
 # Time control
 It's important to understand why testing is done at STC.
@@ -27,11 +31,11 @@ The argument is the same against fixed nodes here.
 
 ### Why such a short time control
 A longer time control would actually be more ideal, as you almost always want to optimize for the longest time control possible.
-The issue is that, testing takes a lot of games, and that takes a lot of time. If uou use a very long time control, you will never be able to reach statistically significant results in a reasonable amount of time.
-The specific choice of STC is arbitrary and the effective time control also depends on hardware. Sometimes LTC is used to optimize for longer time controls.
+The issue is that, testing takes a lot of games, and that takes a lot of time. If you use a very long time control, you will never be able to reach statistically significant results in a reasonable amount of time(and making judgements without statistical backing is far worse than optimizing for short time controls).
+The specific choice of STC is mostly arbitrary and the effective time control also depends on hardware. Sometimes LTC is used to optimize for longer time controls.
 
 ### Why increment
-Testing at sudden death(0 increment) generally makes no sense for chess engines. If an engine is losing on time the test result is considered to be useless.
+Testing at sudden death(0 increment) generally does not make sense for chess engines. If an engine is losing on time the test result is considered to be useless.
 The specific choice of base time / 100 is something which the stockfish team measured to maximize elo difference(which makes tests pass faster)
 
 # Why self-play
