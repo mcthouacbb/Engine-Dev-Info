@@ -20,7 +20,7 @@ However, the inverse does not apply. Optimizing for finding tactics, reaching hi
 # Time control
 It's important to understand why testing is done at STC.
 ### Why not fixed depth
-The argument against fixed depth is similar to the argument against using ttd/ntd as the metric. Depth is really not a strong way to control how much time engines use, and you can easily manipulate the depth to gain elo at fixed depth, regardless of if it would gain at an actual time control
+The argument against fixed depth is similar to the argument against using TTD/NTD as the metric. Depth is really not a strong way to control how much time engines use, and you can easily manipulate the depth to gain elo at fixed depth, regardless of if it would gain at an actual time control
 With fixed depth testing, almost any form of reductions/pruning is sure to lose elo, as it just searches less nodes with no benefit. At a real time control, the less nodes spent in one depth are possibly made up for by searching to higher depths overall, and thus spending more time on useful parts of the search tree.
 Similarly, almost any form of extensions is sure to gain elo, as it just searches more nodes with no downsides. At a real time control, the extensions could take away from time spent in other parts of the search tree.
 ### Why not fixed nodes
