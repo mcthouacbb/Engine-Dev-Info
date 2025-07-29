@@ -45,6 +45,8 @@ It is not clear why self-play elo translates so well to play against other oppon
 (Note that this is simplifying things a bit)
 SPRT is a statistical test that will automatically stop when reaching statistical significance. It is provably optimal in that it takes the least number of samples on average to prove a hypothesis with statistical significance.
 
+Compared to running a fixed number of games SPRT has the advantage that it does not require any prior knowledge about the number of games needed. It stops exactly when the necessary statistical confidence is reached. With a fixed number of games, one is susceptible to wasting time running an enormous amount of games or not running enough games to reach statistical significance. 
+
 # Why opening books
 When running self-play tests, it is crucial to use opening books. Essentially, opening books are used to add variety to the games that the engines play. 
 Consider the case where testing is only done from the starting position of chess, and that the engines are playing the same few games over and over. Then, even if we play thousands of games, we really only have a few statistical samples that we are using to draw conclusions. It could also be viewed from the perspective that every sample is highly correlated to the rest and the samples are not independent. 
