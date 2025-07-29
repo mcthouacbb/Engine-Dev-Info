@@ -1,8 +1,16 @@
-Time Control
-STC
-SSS
-SPRT
+- Time Control
+- STC
+    - Stands for short time control"
+    - Most commonly used time control for testing. Generally refers to time controls around 8+0.08 or 10+0.1 (although the effective time control is hardware and engine dependent)
+- SSS
+- SPRT
 
-Depth
-TTD/NTD
-Elo
+- Depth
+    - In pure minimax/negamax, depth refers to exactly how deep the search goes before it reaches a leaf node and returns a static evaluation
+    - Once more search features are added, depth no longer measures exactly how deep a search goes. Instead, it is a rough proxy for the quality of a search.
+- TTD/NTD
+    - Stands for time-to-depth and nodes-to-depth.
+    - Refers to how long/how many nodes it takes to reach certain depths.
+    - Low TTD/NTD means high depths are reached quickly, while high TTD/NTD means high depths are not reached quickly.
+    - Stronger engines generally have lower TTD and NTD, but minimizing TTD or NTD does not necessarily lead to a stro bf er engine
+- Elo
