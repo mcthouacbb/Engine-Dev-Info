@@ -13,7 +13,7 @@ Games are typically run at STC(8+0.08 or 10+0.1). The games are played out from 
 # Why Elo
 A natural consideration is why elo is used as a metric rather than something like TTD or a test suite.
 
-The simple answer is that measuring Elo is guaranteed to make your engine play better(that is, playing good moves), and playing better will naturally lead to other desirable factors, such as outputting accurate scores, finding tactics, and reaching high depths.
+The simple answer is that optimizing for Elo is guaranteed to make your engine play better(that is, playing good moves), and playing better will naturally lead to other desirable factors over time, such as outputting accurate scores, finding tactics, and reaching high depths.
 
 However, the inverse does not apply. Optimizing for finding tactics, reaching high depths, outputting accurate scores, or any metric other than elo does not guarantee making your engine better, and it can make your engine worse.
 
